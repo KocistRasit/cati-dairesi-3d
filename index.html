@@ -58,7 +58,7 @@ button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 <div id="labels"></div>
 <section id="card">
   <h1>Çatı Dairesi</h1>
-  <p>3+1 · Teraslı · Asansörlü · 5 no'lu bağımsız bölüm · +13,20 kotu</p>
+  <p>3+1 · Ebeveyn banyolu · Teraslı · Asansörlü · 5 no'lu bağımsız bölüm · +13,20 kotu</p>
   <div class="facts"><b>Net 91,40 m²</b><b title="Brüt: daire duvarları dahil + kattaki merdiven, asansör ve kat holü payı">Brüt 121,18 m²</b><b class="alt">Teras 4,64 m²</b><b class="alt">Salon 22,76 m²</b></div>
 </section>
 <div id="hint">Bir parmakla döndürün, iki parmakla yakınlaştırıp kaydırın.</div>
@@ -321,7 +321,7 @@ function build(){
   function wood(x0,y0,x1,y1){r=R(x0,y0,x1,y1);planks(r[0],r[1],r[2],r[3],OAK,true,.012,.17);}
   function tile(x0,y0,x1,y1,sz,col){r=R(x0,y0,x1,y1);tiles(r[0],r[1],r[2],r[3],sz,col,.012);}
   wood(20,70,315,540);wood(315,411,395,540);wood(215,550,536,857);wood(405,531,536,550);wood(555,70,923,401);wood(1043,396,1545,857);
-  tile(405,411,1033,521,.6,'#ddd8cd');tile(455,301,545,411,.6,'#ddd8cd');tile(20,550,205,660,.4,'#d6d2c8');
+  tile(405,411,1033,521,.6,'#ddd8cd');tile(455,301,545,411,.6,'#ddd8cd');tile(20,550,205,660,.3,'#cfd8dc');
   tile(325,70,545,291,.4,'#cfd8dc');tile(325,301,445,401,.3,'#cfd8dc');
   tile(933,70,1432,386,.6,'#e3e0d8');tile(933,386,1033,401,.6,'#e3e0d8');
   tile(1438,20,1572,376,.4,'#b9b2a4');
@@ -430,8 +430,22 @@ function build(){
   r=R(256,160,313,400);sh(r[0],r[1],r[2],r[3]);Bx(256,160,313,400,0,2.05,'#e6e0d4',{ao:.08});Bx(255,279,256,281,.05,2,'#b9b2a3',{ao:0});
   r=R(112,78,222,120);sh(r[0],r[1],r[2],r[3],.16);Bx(112,78,222,120,0,.75,WALNUT);
 
-  /* ----- kiler ----- */
-  Bx(22,556,56,654,0,1.6,'#dcd3c3',{ao:.08});Bx(150,610,190,655,0,.35,MUST);Bx(105,612,145,655,0,.5,TEAL);
+  /* ----- ebeveyn banyosu (former kiler; same walls, door from the bedroom) -----
+     the room sits under the 140% roof skirt: ~2.2 m at the door side (y 550), ~1.1 m at the outer wall (y 660) */
+  /* walk-in shower on the left, shower head on the high side */
+  Bx(21,551,96,659,0,.05,'#eef1f2',{ao:0});
+  r=R(58,600,58,600);cyl(O,r[0],r[1],.05,.05,.056,'#8f999f',1,12);
+  Bx(22,566,25,572,1.0,1.95,STEEL,{ao:0});Bx(25,560,45,580,1.92,1.95,STEEL,{ao:0});
+  Bx(21,556,22.5,600,.05,1.9,'#9fb8bf',{ao:0});
+  r=R(96,551,98,600);box(T,r[0],.05,r[1],r[2],1.9,r[3],GLASS,{a:.32});Bx(96,551,98,600,1.88,1.9,STEEL,{ao:0});
+  /* wall-hung toilet against the low outer wall */
+  Bx(108,652,152,659,0,.9,WHITE,{ao:0});Bx(114,612,146,652,.38,.44,WHITE,{ao:0});Bx(116,616,144,650,.2,.38,WHITE,{ao:0});
+  /* vanity with basin and mirror on the side wall, under the higher part of the roof */
+  Bx(162,588,204,648,.25,.85,WALNUT);Bx(160,590,204,646,.85,.89,WHITE,{ao:0});
+  r=R(183,618,183,618);cyl(O,r[0],r[1],.14,.89,.95,WHITE,1,18);cyl(O,r[0]+.17,r[1],.012,.89,1.05,STEEL,1,8);
+  Bx(204,596,204.8,640,1.0,1.55,MIRROR,{ao:0});
+  /* towel rail by the door and bath mat */
+  Bx(203.5,556,204.8,582,.9,1.5,STEEL,{ao:0});Bx(110,556,158,598,.05,.065,'#a9c6cc',{ao:0});
 
   /* ----- çocuk odası ----- */
   r=R(390,640,390,640);cyl(O,r[0],r[1],.7,.012,.03,TEAL,1,28);cyl(O,r[0],r[1],.48,.03,.034,'#69b0ad',1,28);
@@ -540,7 +554,7 @@ function go(to){
 /* ---------- labels ---------- */
 var ROOMS=[['Salon','22,76 m²',12.85,2.6],['Mutfak','15,57 m²',11.8,6.8],['Yatak Odası','14,87 m²',1.65,5.8],['Oturma Odası','12,21 m²',7.4,6.4],
   ['Çocuk Odası','10,01 m²',3.75,1.8],['Banyo','4,86 m²',4.35,7.0],['Antre','7,90 m²',7.6,4.13],['Teras','4,64 m²',15.0,6.8],
-  ['Kiler','2,02 m²',1.12,2.74,1],['WC','1,20 m²',3.85,5.3,1],['Asansör','3,07 m²',9.27,1.12,1],['Merdiven','',6.84,1.3,1]];
+  ['Ebeveyn Banyosu','2,02 m²',1.12,2.74,1],['WC','1,20 m²',3.85,5.3,1],['Asansör','3,07 m²',9.27,1.12,1],['Merdiven','',6.84,1.3,1]];
 var lblBox=$('#labels');
 ROOMS.forEach(function(r){
   var d=document.createElement('div');d.className='lbl'+(r[4]?' minor':'');d.textContent=r[0];
